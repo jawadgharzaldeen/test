@@ -1,0 +1,1058 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Universal Form Auto-Filler - Comprehensive Test Suite</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <!-- Replace YOUR-API-KEY with your actual TinyMCE API key -->
+    <script src="https://cdn.tiny.cloud/1/YOUR-API-KEY/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-magic"></i>
+                    <h1>Universal Form Auto-Filler</h1>
+                </div>
+                <div class="version">
+                    <span class="badge">v2.0 Enhanced</span>
+                </div>
+            </div>
+            <p class="subtitle">Comprehensive Test Suite for Desktop Features Integration</p>
+        </div>
+    </header>
+
+    <!-- Navigation -->
+    <nav class="nav-tabs">
+        <div class="container">
+            <div class="tab-buttons">
+                <button class="tab-btn active" data-tab="basic">Basic Forms</button>
+                <button class="tab-btn" data-tab="advanced">Advanced Fields</button>
+                <button class="tab-btn" data-tab="social">Social Media</button>
+                <button class="tab-btn" data-tab="ecommerce">E-commerce</button>
+                <button class="tab-btn" data-tab="richtext">Rich Text</button>
+                <button class="tab-btn" data-tab="frameworks">Framework Tests</button>
+                <button class="tab-btn" data-tab="security">Security Tests</button>
+                <button class="tab-btn" data-tab="results">Test Results</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Test Instructions -->
+    <section class="instructions">
+        <div class="container">
+            <div class="instruction-card">
+                <h2><i class="fas fa-info-circle"></i> How to Test</h2>
+                <ol>
+                    <li><strong>Install</strong> your enhanced Universal Form Auto-Filler extension</li>
+                    <li><strong>Open</strong> the extension popup and configure your data</li>
+                    <li><strong>Navigate</strong> through each tab to test different form types</li>
+                    <li><strong>Watch</strong> for the green glow on filled fields (new feature!)</li>
+                    <li><strong>Check</strong> the browser console (F12) for detailed logs with field scores</li>
+                    <li><strong>Record</strong> your results in the "Test Results" tab</li>
+                </ol>
+                <div class="key-features">
+                    <h3>🚀 New Features to Test:</h3>
+                    <div class="features-grid">
+                        <span class="feature">✨ Green Glow Visual Feedback</span>
+                        <span class="feature">🎯 Smart Field Scoring (0-100+)</span>
+                        <span class="feature">📝 Rich Text Editor Support</span>
+                        <span class="feature">🔐 Secure Password Filling</span>
+                        <span class="feature">⚡ React/Vue/Angular Events</span>
+                        <span class="feature">🛡️ Context Validation</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tab Content -->
+    <main class="main-content">
+        <div class="container">
+            
+            <!-- Basic Forms Tab -->
+            <div class="tab-content active" id="basic">
+                <div class="test-section">
+                    <h2><i class="fas fa-wpforms"></i> Basic Form Fields Test</h2>
+                    <p class="section-desc">Test basic text inputs, emails, and standard form fields with enhanced scoring system.</p>
+                    
+                    <div class="form-grid">
+                        <!-- Contact Form -->
+                        <form class="test-form" id="contact-form">
+                            <h3>Contact Information</h3>
+                            <div class="field-group">
+                                <label for="firstName">First Name</label>
+                                <input type="text" id="firstName" name="firstName" placeholder="Enter your first name">
+                                <div class="field-info">Expected Score: 90+ (exact name match)</div>
+                            </div>
+                            <div class="field-group">
+                                <label for="lastName">Last Name</label>
+                                <input type="text" id="lastName" name="lastName" placeholder="Enter your last name">
+                                <div class="field-info">Expected Score: 90+ (exact name match)</div>
+                            </div>
+                            <div class="field-group">
+                                <label for="email">Email Address</label>
+                                <input type="email" id="email" name="email" placeholder="your.email@example.com">
+                                <div class="field-info">Expected Score: 90+ (exact match + type=email)</div>
+                            </div>
+                            <div class="field-group">
+                                <label for="phone">Phone Number</label>
+                                <input type="tel" id="phone" name="phone" placeholder="+1 (555) 123-4567">
+                                <div class="field-info">Expected Score: 90+ (exact match + type=tel)</div>
+                            </div>
+                            <div class="field-group">
+                                <label for="company">Company Name</label>
+                                <input type="text" id="company" name="company" placeholder="Your Company Inc.">
+                                <div class="field-info">Expected Score: 90+ (exact name match)</div>
+                            </div>
+                            <button type="submit" class="btn-primary">Submit Contact Form</button>
+                        </form>
+
+                        <!-- Alternative Field Names -->
+                        <form class="test-form" id="alt-names-form">
+                            <h3>Alternative Field Names (Keyword Matching)</h3>
+                            <div class="field-group">
+                                <label for="user_email">User Email</label>
+                                <input type="text" id="user_email" name="user_email" placeholder="Alternative email field">
+                                <div class="field-info">Expected Score: 60+ (keyword: 'email')</div>
+                            </div>
+                            <div class="field-group">
+                                <label for="contact_phone">Contact Phone</label>
+                                <input type="text" id="contact_phone" name="contact_phone" placeholder="Phone with different naming">
+                                <div class="field-info">Expected Score: 60+ (keyword: 'phone')</div>
+                            </div>
+                            <div class="field-group">
+                                <label>Full Name</label>
+                                <input type="text" name="fullname" placeholder="Full name field" aria-label="Full Name">
+                                <div class="field-info">Expected Score: 50+ (aria-label match)</div>
+                            </div>
+                            <div class="field-group">
+                                <label>Organization</label>
+                                <input type="text" class="company-field" placeholder="Company or organization" data-testid="company">
+                                <div class="field-info">Expected Score: 45+ (class name + data-testid)</div>
+                            </div>
+                            <button type="submit" class="btn-secondary">Test Alternative Names</button>
+                        </form>
+                    </div>
+
+                    <!-- Hidden Fields Test -->
+                    <div class="hidden-fields-test">
+                        <h3>🔍 Hidden Fields Test (Should NOT be filled)</h3>
+                        <p>These fields should receive negative scores and NOT be filled:</p>
+                        <div class="hidden-examples">
+                            <input type="hidden" name="email" value="">
+                            <input type="text" name="email" style="display: none;" placeholder="Hidden with display:none">
+                            <input type="text" name="phone" style="visibility: hidden;" placeholder="Hidden with visibility">
+                            <input type="text" name="company" style="opacity: 0;" placeholder="Hidden with opacity">
+                            <input type="text" name="firstName" disabled placeholder="Disabled field">
+                            <div class="test-note">✅ All above fields should remain empty after filling</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Advanced Fields Tab -->
+            <div class="tab-content" id="advanced">
+                <div class="test-section">
+                    <h2><i class="fas fa-cogs"></i> Advanced Form Fields</h2>
+                    <p class="section-desc">Test specialized input types, dropdowns, checkboxes, and complex form elements.</p>
+                    
+                    <div class="form-grid">
+                        <form class="test-form" id="advanced-form">
+                            <h3>Specialized Input Types</h3>
+                            
+                            <div class="field-group">
+                                <label for="birthDate">Birth Date</label>
+                                <input type="date" id="birthDate" name="birthDate">
+                                <div class="field-info">Tests date field handling</div>
+                            </div>
+                            
+                            <div class="field-group">
+                                <label for="website">Website URL</label>
+                                <input type="url" id="website" name="website" placeholder="https://yoursite.com">
+                                <div class="field-info">Expected Score: 90+ (exact match + type=url)</div>
+                            </div>
+                            
+                            <div class="field-group">
+                                <label for="age">Age</label>
+                                <input type="number" id="age" name="age" min="18" max="100" placeholder="25">
+                                <div class="field-info">Tests number input</div>
+                            </div>
+                            
+                            <div class="field-group">
+                                <label for="salary">Salary Range</label>
+                                <input type="range" id="salary" name="salary" min="30000" max="200000" value="75000">
+                                <output for="salary" id="salary-output">$75,000</output>
+                                <div class="field-info">Tests range input</div>
+                            </div>
+                            
+                            <div class="field-group">
+                                <label for="favoriteColor">Favorite Color</label>
+                                <input type="color" id="favoriteColor" name="favoriteColor" value="#3498db">
+                                <div class="field-info">Tests color picker</div>
+                            </div>
+                            
+                            <div class="field-group">
+                                <label for="country">Country</label>
+                                <select id="country" name="country">
+                                    <option value="">Select Country</option>
+                                    <option value="US">United States</option>
+                                    <option value="CA">Canada</option>
+                                    <option value="UK">United Kingdom</option>
+                                    <option value="DE">Germany</option>
+                                    <option value="FR">France</option>
+                                    <option value="JP">Japan</option>
+                                    <option value="AU">Australia</option>
+                                </select>
+                                <div class="field-info">Tests dropdown selection</div>
+                            </div>
+                            
+                            <div class="field-group">
+                                <label for="bio">Biography</label>
+                                <textarea id="bio" name="bio" rows="4" placeholder="Tell us about yourself..."></textarea>
+                                <div class="field-info">Tests textarea filling</div>
+                            </div>
+                            
+                            <div class="checkbox-group">
+                                <h4>Preferences</h4>
+                                <label class="checkbox-label">
+                                    <input type="checkbox" name="newsletter" value="yes">
+                                    Subscribe to newsletter
+                                </label>
+                                <label class="checkbox-label">
+                                    <input type="checkbox" name="terms" value="accepted">
+                                    Accept terms and conditions
+                                </label>
+                                <label class="checkbox-label">
+                                    <input type="checkbox" name="privacy" value="agreed">
+                                    Agree to privacy policy
+                                </label>
+                            </div>
+                            
+                            <div class="radio-group">
+                                <h4>Preferred Contact Method</h4>
+                                <label class="radio-label">
+                                    <input type="radio" name="contact_method" value="email">
+                                    Email
+                                </label>
+                                <label class="radio-label">
+                                    <input type="radio" name="contact_method" value="phone">
+                                    Phone
+                                </label>
+                                <label class="radio-label">
+                                    <input type="radio" name="contact_method" value="sms">
+                                    SMS
+                                </label>
+                            </div>
+                            
+                            <div class="field-group">
+                                <label for="resume">Upload Resume</label>
+                                <input type="file" id="resume" name="resume" accept=".pdf,.doc,.docx">
+                                <div class="field-info">File inputs cannot be auto-filled (security)</div>
+                            </div>
+                            
+                            <button type="submit" class="btn-primary">Submit Advanced Form</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Social Media Tab -->
+            <div class="tab-content" id="social">
+                <div class="test-section">
+                    <h2><i class="fab fa-twitter"></i> Social Media Fields</h2>
+                    <p class="section-desc">Test social media URL detection and filling with enhanced keyword matching.</p>
+                    
+                    <div class="form-grid">
+                        <form class="test-form" id="social-form">
+                            <h3>Social Media Profiles</h3>
+                            
+                            <div class="field-group">
+                                <label for="twitter">Twitter/X Profile</label>
+                                <input type="url" id="twitter" name="twitter" placeholder="https://twitter.com/username">
+                                <div class="field-info">Expected Score: 90+ (exact name match)</div>
+                            </div>
+                            
+                            <div class="field-group">
+                                <label for="facebook">Facebook Profile</label>
+                                <input type="url" id="facebook" name="facebook" placeholder="https://facebook.com/username">
+                                <div class="field-info">Expected Score: 90+ (exact name match)</div>
+                            </div>
+                            
+                            <div class="field-group">
+                                <label for="instagram">Instagram Profile</label>
+                                <input type="url" id="instagram" name="instagram" placeholder="https://instagram.com/username">
+                                <div class="field-info">Expected Score: 90+ (exact name match)</div>
+                            </div>
+                            
+                            <div class="field-group">
+                                <label for="linkedin">LinkedIn Profile</label>
+                                <input type="url" id="linkedin" name="linkedin" placeholder="https://linkedin.com/in/username">
+                                <div class="field-info">Expected Score: 90+ (exact name match)</div>
+                            </div>
+                            
+                            <div class="field-group">
+                                <label for="youtube">YouTube Channel</label>
+                                <input type="url" id="youtube" name="youtube" placeholder="https://youtube.com/@username">
+                                <div class="field-info">Expected Score: 90+ (exact name match)</div>
+                            </div>
+                            
+                            <div class="field-group">
+                                <label for="tiktok">TikTok Profile</label>
+                                <input type="url" id="tiktok" name="tiktok" placeholder="https://tiktok.com/@username">
+                                <div class="field-info">Expected Score: 90+ (exact name match)</div>
+                            </div>
+                            
+                            <button type="submit" class="btn-primary">Save Social Profiles</button>
+                        </form>
+
+                        <!-- Alternative Social Field Names -->
+                        <form class="test-form" id="alt-social-form">
+                            <h3>Alternative Social Field Names</h3>
+                            
+                            <div class="field-group">
+                                <label>Twitter Handle</label>
+                                <input type="text" name="twitter_handle" placeholder="@username" aria-label="Twitter Handle">
+                                <div class="field-info">Expected Score: 60+ (keyword: 'twitter')</div>
+                            </div>
+                            
+                            <div class="field-group">
+                                <label>FB Profile</label>
+                                <input type="text" name="fb_url" placeholder="Facebook URL" class="facebook-field">
+                                <div class="field-info">Expected Score: 50+ (keyword: 'fb' + class)</div>
+                            </div>
+                            
+                            <div class="field-group">
+                                <label>IG Username</label>
+                                <input type="text" data-social="instagram" placeholder="Instagram username">
+                                <div class="field-info">Expected Score: 45+ (data attribute)</div>
+                            </div>
+                            
+                            <div class="field-group">
+                                <label>Professional Network</label>
+                                <input type="text" placeholder="LinkedIn profile URL" data-testid="linkedin-field">
+                                <div class="field-info">Expected Score: 40+ (placeholder + data-testid)</div>
+                            </div>
+                            
+                            <button type="submit" class="btn-secondary">Test Alternative Social Names</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <!-- E-commerce Tab -->
+            <div class="tab-content" id="ecommerce">
+                <div class="test-section">
+                    <h2><i class="fas fa-shopping-cart"></i> E-commerce Forms</h2>
+                    <p class="section-desc">Test e-commerce checkout forms, billing information, and payment fields.</p>
+                    
+                    <div class="form-grid">
+                        <!-- Billing Information -->
+                        <form class="test-form" id="billing-form">
+                            <h3>Billing Information</h3>
+                            
+                            <div class="field-group">
+                                <label for="billingFirstName">First Name *</label>
+                                <input type="text" id="billingFirstName" name="billing_first_name" required>
+                                <div class="field-info">Expected Score: 80+ (name + billing context)</div>
+                            </div>
+                            
+                            <div class="field-group">
+                                <label for="billingLastName">Last Name *</label>
+                                <input type="text" id="billingLastName" name="billing_last_name" required>
+                                <div class="field-info">Expected Score: 80+ (name + billing context)</div>
+                            </div>
+                            
+                            <div class="field-group">
+                                <label for="billingEmail">Email Address *</label>
+                                <input type="email" id="billingEmail" name="billing_email" required>
+                                <div class="field-info">Expected Score: 90+ (exact match + type)</div>
+                            </div>
+                            
+                            <div class="field-group">
+                                <label for="billingPhone">Phone Number</label>
+                                <input type="tel" id="billingPhone" name="billing_phone">
+                                <div class="field-info">Expected Score: 80+ (phone + billing context)</div>
+                            </div>
+                            
+                            <div class="field-group">
+                                <label for="address">Street Address *</label>
+                                <input type="text" id="address" name="address" placeholder="123 Main Street" required>
+                                <div class="field-info">Expected Score: 90+ (exact name match)</div>
+                            </div>
+                            
+                            <div class="field-row">
+                                <div class="field-group">
+                                    <label for="city">City *</label>
+                                    <input type="text" id="city" name="city" required>
+                                    <div class="field-info">Expected Score: 90+</div>
+                                </div>
+                                
+                                <div class="field-group">
+                                    <label for="state">State</label>
+                                    <select id="state" name="state">
+                                        <option value="">Select State</option>
+                                        <option value="AL">Alabama</option>
+                                        <option value="CA">California</option>
+                                        <option value="FL">Florida</option>
+                                        <option value="NY">New York</option>
+                                        <option value="TX">Texas</option>
+                                    </select>
+                                    <div class="field-info">Tests state selection</div>
+                                </div>
+                                
+                                <div class="field-group">
+                                    <label for="zipcode">ZIP Code *</label>
+                                    <input type="text" id="zipcode" name="zipcode" pattern="[0-9]{5}" required>
+                                    <div class="field-info">Expected Score: 90+</div>
+                                </div>
+                            </div>
+                            
+                            <button type="submit" class="btn-primary">Save Billing Info</button>
+                        </form>
+
+                        <!-- Payment Information -->
+                        <form class="test-form" id="payment-form">
+                            <h3>Payment Information</h3>
+                            <div class="security-notice">
+                                <i class="fas fa-shield-alt"></i>
+                                <strong>Note:</strong> Credit card fields should NOT be auto-filled for security reasons.
+                            </div>
+                            
+                            <div class="field-group">
+                                <label for="cardNumber">Card Number</label>
+                                <input type="text" id="cardNumber" name="card_number" placeholder="1234 5678 9012 3456" maxlength="19">
+                                <div class="field-info">Should NOT be filled (security)</div>
+                            </div>
+                            
+                            <div class="field-row">
+                                <div class="field-group">
+                                    <label for="expiryMonth">Expiry Month</label>
+                                    <select id="expiryMonth" name="expiry_month">
+                                        <option value="">Month</option>
+                                        <option value="01">01</option>
+                                        <option value="02">02</option>
+                                        <option value="03">03</option>
+                                        <option value="04">04</option>
+                                        <option value="05">05</option>
+                                        <option value="06">06</option>
+                                        <option value="07">07</option>
+                                        <option value="08">08</option>
+                                        <option value="09">09</option>
+                                        <option value="10">10</option>
+                                        <option value="11">11</option>
+                                        <option value="12">12</option>
+                                    </select>
+                                </div>
+                                
+                                <div class="field-group">
+                                    <label for="expiryYear">Expiry Year</label>
+                                    <select id="expiryYear" name="expiry_year">
+                                        <option value="">Year</option>
+                                        <option value="2024">2024</option>
+                                        <option value="2025">2025</option>
+                                        <option value="2026">2026</option>
+                                        <option value="2027">2027</option>
+                                        <option value="2028">2028</option>
+                                        <option value="2029">2029</option>
+                                    </select>
+                                </div>
+                                
+                                <div class="field-group">
+                                    <label for="cvv">CVV</label>
+                                    <input type="password" id="cvv" name="cvv" placeholder="123" maxlength="4">
+                                    <div class="field-info">Should NOT be filled (security)</div>
+                                </div>
+                            </div>
+                            
+                            <button type="submit" class="btn-primary">Process Payment</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Rich Text Tab -->
+            <div class="tab-content" id="richtext">
+                <div class="test-section">
+                    <h2><i class="fas fa-edit"></i> Rich Text Editors</h2>
+                    <p class="section-desc">Test rich text editor support including TinyMCE and contenteditable elements.</p>
+                    
+                    <div class="form-grid">
+                        <form class="test-form" id="richtext-form">
+                            <h3>Rich Text Editor Tests</h3>
+                            
+                            <div class="field-group">
+                                <label for="title">Article Title</label>
+                                <input type="text" id="title" name="title" placeholder="Enter article title">
+                                <div class="field-info">Expected Score: 90+ (exact name match)</div>
+                            </div>
+                            
+                            <div class="field-group">
+                                <label for="tinymce-editor">TinyMCE Editor</label>
+                                <textarea id="tinymce-editor" name="description" placeholder="This will become a TinyMCE editor">
+                                    Enter your article content here. This editor supports rich text formatting.
+                                </textarea>
+                                <div class="field-info">Tests TinyMCE rich text editor filling</div>
+                            </div>
+                            
+                            <div class="field-group">
+                                <label for="contenteditable-div">ContentEditable Div</label>
+                                <div id="contenteditable-div" 
+                                     contenteditable="true" 
+                                     class="contenteditable-field"
+                                     data-placeholder="Click here to edit content..."
+                                     name="content">
+                                    This is a contenteditable div that should be filled by the enhanced extension.
+                                </div>
+                                <div class="field-info">Tests contenteditable div filling</div>
+                            </div>
+                            
+                            <div class="field-group">
+                                <label for="simple-editor">Simple Rich Text</label>
+                                <div id="simple-editor" 
+                                     contenteditable="true" 
+                                     class="simple-editor"
+                                     aria-label="Rich text editor">
+                                    <p>Edit this rich text content...</p>
+                                </div>
+                                <div class="field-info">Tests aria-label based detection</div>
+                            </div>
+                            
+                            <button type="submit" class="btn-primary">Save Article</button>
+                        </form>
+
+                        <!-- Blog Post Form -->
+                        <form class="test-form" id="blog-form">
+                            <h3>Blog Post Creation</h3>
+                            
+                            <div class="field-group">
+                                <label for="post_title">Post Title</label>
+                                <input type="text" id="post_title" name="post_title" placeholder="Enter your blog post title">
+                                <div class="field-info">Expected Score: 80+ (title keyword match)</div>
+                            </div>
+                            
+                            <div class="field-group">
+                                <label for="post_excerpt">Post Excerpt</label>
+                                <textarea id="post_excerpt" name="post_excerpt" rows="3" placeholder="Brief description of your post"></textarea>
+                                <div class="field-info">Tests textarea with description-like content</div>
+                            </div>
+                            
+                            <div class="field-group">
+                                <label>Post Content</label>
+                                <div class="wp-editor-container">
+                                    <div id="wp-content-editor" 
+                                         contenteditable="true" 
+                                         class="wp-editor-area"
+                                         data-field="content">
+                                        <p>Write your blog post content here. This simulates a WordPress-style editor.</p>
+                                    </div>
+                                </div>
+                                <div class="field-info">Simulates WordPress editor</div>
+                            </div>
+                            
+                            <div class="field-group">
+                                <label for="tags">Tags</label>
+                                <input type="text" id="tags" name="tags" placeholder="tag1, tag2, tag3">
+                                <div class="field-info">Tests tag field detection</div>
+                            </div>
+                            
+                            <button type="submit" class="btn-primary">Publish Post</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Framework Tests Tab -->
+            <div class="tab-content" id="frameworks">
+                <div class="test-section">
+                    <h2><i class="fab fa-react"></i> Framework Compatibility</h2>
+                    <p class="section-desc">Test compatibility with React, Vue, Angular, and jQuery form handling.</p>
+                    
+                    <div class="framework-tests">
+                        <!-- React-style Form -->
+                        <div class="test-form">
+                            <h3>React-Style Form (Event Simulation Test)</h3>
+                            <div class="framework-info">
+                                <p>This form simulates React's controlled components. The enhanced extension should dispatch proper events.</p>
+                            </div>
+                            
+                            <div class="field-group">
+                                <label for="react-email">Email (React Style)</label>
+                                <input type="email" 
+                                       id="react-email" 
+                                       name="email" 
+                                       data-react="true"
+                                       placeholder="test@example.com">
+                                <div class="field-info">Should trigger React onChange events</div>
+                            </div>
+                            
+                            <div class="field-group">
+                                <label for="react-phone">Phone (with validation)</label>
+                                <input type="tel" 
+                                       id="react-phone" 
+                                       name="phone"
+                                       data-react="true"
+                                       placeholder="(555) 123-4567">
+                                <div class="validation-message" id="phone-validation"></div>
+                                <div class="field-info">Should trigger validation events</div>
+                            </div>
+                            
+                            <div class="field-group">
+                                <label for="react-select">Country (React Select)</label>
+                                <select id="react-select" name="country" data-react="true">
+                                    <option value="">Choose country...</option>
+                                    <option value="US">United States</option>
+                                    <option value="CA">Canada</option>
+                                    <option value="UK">United Kingdom</option>
+                                </select>
+                                <div class="field-info">Should trigger select change events</div>
+                            </div>
+                            
+                            <button type="button" id="react-submit" class="btn-primary">React Submit</button>
+                        </div>
+
+                        <!-- Vue-style Form -->
+                        <div class="test-form">
+                            <h3>Vue-Style Form (v-model Simulation)</h3>
+                            <div class="framework-info">
+                                <p>This form simulates Vue's v-model binding. Values should update the Vue data model.</p>
+                            </div>
+                            
+                            <div class="field-group">
+                                <label for="vue-name">Full Name (Vue Style)</label>
+                                <input type="text" 
+                                       id="vue-name" 
+                                       name="fullName"
+                                       data-vue="true"
+                                       placeholder="John Doe">
+                                <div class="field-info">Should trigger Vue input events</div>
+                            </div>
+                            
+                            <div class="field-group">
+                                <label for="vue-message">Message (Vue Textarea)</label>
+                                <textarea id="vue-message" 
+                                          name="message"
+                                          data-vue="true"
+                                          rows="4"
+                                          placeholder="Enter your message..."></textarea>
+                                <div class="field-info">Should update Vue reactive data</div>
+                            </div>
+                            
+                            <button type="button" id="vue-submit" class="btn-primary">Vue Submit</button>
+                        </div>
+
+                        <!-- Angular-style Form -->
+                        <div class="test-form">
+                            <h3>Angular-Style Form (NgModel Simulation)</h3>
+                            <div class="framework-info">
+                                <p>This form simulates Angular's NgModel binding with form validation.</p>
+                            </div>
+                            
+                            <div class="field-group">
+                                <label for="ng-email">Email (Angular Style)</label>
+                                <input type="email" 
+                                       id="ng-email" 
+                                       name="email"
+                                       data-ng="true"
+                                       placeholder="angular@example.com"
+                                       required>
+                                <div class="ng-validation" id="email-ng-validation"></div>
+                                <div class="field-info">Should trigger Angular validation</div>
+                            </div>
+                            
+                            <div class="field-group">
+                                <label for="ng-password">Password (Angular)</label>
+                                <input type="password" 
+                                       id="ng-password" 
+                                       name="password"
+                                       data-ng="true"
+                                       placeholder="Enter password"
+                                       minlength="6">
+                                <div class="ng-validation" id="password-ng-validation"></div>
+                                <div class="field-info">Should trigger validation and be filled if password data exists</div>
+                            </div>
+                            
+                            <button type="button" id="ng-submit" class="btn-primary">Angular Submit</button>
+                        </div>
+
+                        <!-- jQuery Form -->
+                        <div class="test-form">
+                            <h3>jQuery-Enhanced Form</h3>
+                            <div class="framework-info">
+                                <p>This form uses jQuery event handlers and validation.</p>
+                            </div>
+                            
+                            <div class="field-group">
+                                <label for="jquery-name">Name (jQuery)</label>
+                                <input type="text" 
+                                       id="jquery-name" 
+                                       name="name"
+                                       class="jquery-field"
+                                       placeholder="Your name">
+                                <div class="field-info">Should trigger jQuery change events</div>
+                            </div>
+                            
+                            <div class="field-group">
+                                <label for="jquery-website">Website (jQuery URL)</label>
+                                <input type="url" 
+                                       id="jquery-website" 
+                                       name="website"
+                                       class="jquery-field"
+                                       placeholder="https://yoursite.com">
+                                <div class="field-info">Should trigger jQuery validation</div>
+                            </div>
+                            
+                            <button type="button" id="jquery-submit" class="btn-primary">jQuery Submit</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Security Tests Tab -->
+            <div class="tab-content" id="security">
+                <div class="test-section">
+                    <h2><i class="fas fa-shield-alt"></i> Security & Edge Cases</h2>
+                    <p class="section-desc">Test security features, honeypot detection, and edge case handling.</p>
+                    
+                    <div class="form-grid">
+                        <!-- Password Security Test -->
+                        <form class="test-form" id="security-form">
+                            <h3>Password Security Test</h3>
+                            
+                            <div class="field-group">
+                                <label for="username">Username</label>
+                                <input type="text" id="username" name="username" placeholder="Enter username">
+                                <div class="field-info">Should be filled normally</div>
+                            </div>
+                            
+                            <div class="field-group">
+                                <label for="password1">Password</label>
+                                <input type="password" id="password1" name="password" placeholder="Enter password">
+                                <div class="field-info">Should be filled if password data exists, logged as ********</div>
+                            </div>
+                            
+                            <div class="field-group">
+                                <label for="password2">Confirm Password</label>
+                                <input type="password" id="password2" name="confirm_password" placeholder="Confirm password">
+                                <div class="field-info">Should be filled with same password</div>
+                            </div>
+                            
+                            <!-- This should NOT be filled with password data -->
+                            <div class="field-group">
+                                <label for="not-password">Email (but named password - should NOT get password data)</label>
+                                <input type="email" id="not-password" name="password_reset_email" placeholder="Reset email">
+                                <div class="field-info">Should get EMAIL data, not password (smart detection)</div>
+                            </div>
+                            
+                            <button type="submit" class="btn-primary">Test Password Security</button>
+                        </form>
+
+                        <!-- Honeypot & Hidden Fields -->
+                        <form class="test-form" id="honeypot-form">
+                            <h3>Honeypot & Anti-Bot Test</h3>
+                            <div class="security-notice">
+                                <i class="fas fa-bug"></i>
+                                <strong>Honeypot Fields:</strong> These should NOT be filled (negative scores).
+                            </div>
+                            
+                            <!-- Visible fields (should be filled) -->
+                            <div class="field-group">
+                                <label for="real-name">Your Name (Visible)</label>
+                                <input type="text" id="real-name" name="firstName" placeholder="Your real name">
+                                <div class="field-info">✅ Should be filled (visible, normal field)</div>
+                            </div>
+                            
+                            <div class="field-group">
+                                <label for="real-email">Your Email (Visible)</label>
+                                <input type="email" id="real-email" name="email" placeholder="your@email.com">
+                                <div class="field-info">✅ Should be filled (visible, normal field)</div>
+                            </div>
+                            
+                            <!-- Honeypot fields (should NOT be filled) -->
+                            <div style="position: absolute; left: -9999px;">
+                                <label for="honeypot-name">Name (Honeypot)</label>
+                                <input type="text" id="honeypot-name" name="firstName" placeholder="Honeypot name">
+                            </div>
+                            
+                            <input type="text" name="email" style="display: none;" placeholder="Hidden email honeypot">
+                            <input type="text" name="phone" style="visibility: hidden;" placeholder="Invisible phone">
+                            <input type="text" name="company" style="opacity: 0;" placeholder="Transparent company">
+                            
+                            <!-- Disabled fields (should NOT be filled) -->
+                            <div class="field-group">
+                                <label for="disabled-field">Disabled Field</label>
+                                <input type="text" id="disabled-field" name="firstName" disabled placeholder="This is disabled">
+                                <div class="field-info">❌ Should NOT be filled (disabled)</div>
+                            </div>
+                            
+                            <div class="field-group">
+                                <label for="readonly-field">Readonly Field</label>
+                                <input type="text" id="readonly-field" name="email" readonly value="readonly@example.com">
+                                <div class="field-info">❌ Should NOT be filled (readonly)</div>
+                            </div>
+                            
+                            <button type="submit" class="btn-primary">Test Honeypot Detection</button>
+                            
+                            <div class="test-results">
+                                <h4>Expected Results:</h4>
+                                <ul>
+                                    <li>✅ Visible name and email fields should be filled</li>
+                                    <li>❌ All honeypot fields should remain empty</li>
+                                    <li>❌ Disabled and readonly fields should remain unchanged</li>
+                                    <li>📊 Console should show negative scores for honeypot fields</li>
+                                </ul>
+                            </div>
+                        </form>
+
+                        <!-- Context Validation Test -->
+                        <form class="test-form" id="context-form">
+                            <h3>Context Validation Test</h3>
+                            <div class="security-notice">
+                                <i class="fas fa-exclamation-triangle"></i>
+                                <strong>Instructions:</strong> This tests the extension's context validation feature.
+                            </div>
+                            
+                            <div class="field-group">
+                                <label for="context-email">Email</label>
+                                <input type="email" id="context-email" name="email" placeholder="test@example.com">
+                                <div class="field-info">Fill this first, then test context invalidation</div>
+                            </div>
+                            
+                            <div class="field-group">
+                                <label for="context-name">Name</label>
+                                <input type="text" id="context-name" name="firstName" placeholder="Your name">
+                                <div class="field-info">Should be filled before context invalidation</div>
+                            </div>
+                            
+                            <div class="test-instructions">
+                                <h4>Test Steps:</h4>
+                                <ol>
+                                    <li>Fill this form normally (should work)</li>
+                                    <li>Go to chrome://extensions</li>
+                                    <li>Click the reload button for your extension</li>
+                                    <li>Return to this page (don't refresh)</li>
+                                    <li>Try to fill the form again</li>
+                                    <li>Check console for "Context invalid" message</li>
+                                </ol>
+                                <p><strong>Expected:</strong> Second fill attempt should be blocked with warning message.</p>
+                            </div>
+                            
+                            <button type="submit" class="btn-primary">Test Context Validation</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Test Results Tab -->
+            <div class="tab-content" id="results">
+                <div class="test-section">
+                    <h2><i class="fas fa-clipboard-check"></i> Test Results & Validation</h2>
+                    <p class="section-desc">Record your test results and validate the enhanced features are working correctly.</p>
+                    
+                    <div class="results-grid">
+                        <!-- Feature Checklist -->
+                        <div class="test-form">
+                            <h3>✅ Feature Validation Checklist</h3>
+                            
+                            <div class="checkbox-group">
+                                <h4>🎯 Smart Field Detection</h4>
+                                <label class="checkbox-label">
+                                    <input type="checkbox" id="check-scores">
+                                    Console shows field scores (0-100+)
+                                </label>
+                                <label class="checkbox-label">
+                                    <input type="checkbox" id="check-match-types">
+                                    Console shows match types ("selector" or "keyword")
+                                </label>
+                                <label class="checkbox-label">
+                                    <input type="checkbox" id="check-high-accuracy">
+                                    Correct fields are filled (not random ones)
+                                </label>
+                                
+                                <h4>✨ Visual Feedback</h4>
+                                <label class="checkbox-label">
+                                    <input type="checkbox" id="check-green-glow">
+                                    Filled fields show green glow for 2 seconds
+                                </label>
+                                <label class="checkbox-label">
+                                    <input type="checkbox" id="check-multiple-glow">
+                                    Multiple fields glow in sequence when filling
+                                </label>
+                                
+                                <h4>⚡ Enhanced Events</h4>
+                                <label class="checkbox-label">
+                                    <input type="checkbox" id="check-react-compat">
+                                    Works with React-style forms
+                                </label>
+                                <label class="checkbox-label">
+                                    <input type="checkbox" id="check-vue-compat">
+                                    Works with Vue-style forms
+                                </label>
+                                <label class="checkbox-label">
+                                    <input type="checkbox" id="check-angular-compat">
+                                    Works with Angular-style forms
+                                </label>
+                                
+                                <h4>📝 Rich Text Support</h4>
+                                <label class="checkbox-label">
+                                    <input type="checkbox" id="check-tinymce">
+                                    TinyMCE editors are filled
+                                </label>
+                                <label class="checkbox-label">
+                                    <input type="checkbox" id="check-contenteditable">
+                                    ContentEditable divs are filled
+                                </label>
+                                
+                                <h4>🔐 Security Features</h4>
+                                <label class="checkbox-label">
+                                    <input type="checkbox" id="check-password-mask">
+                                    Passwords logged as ******** (not plain text)
+                                </label>
+                                <label class="checkbox-label">
+                                    <input type="checkbox" id="check-honeypot">
+                                    Hidden/honeypot fields are NOT filled
+                                </label>
+                                <label class="checkbox-label">
+                                    <input type="checkbox" id="check-disabled">
+                                    Disabled fields are NOT filled
+                                </label>
+                                <label class="checkbox-label">
+                                    <input type="checkbox" id="check-context">
+                                    Context validation blocks filling after extension reload
+                                </label>
+                                
+                                <h4>🚀 Performance</h4>
+                                <label class="checkbox-label">
+                                    <input type="checkbox" id="check-already-filled">
+                                    Skips fields that already have correct values
+                                </label>
+                                <label class="checkbox-label">
+                                    <input type="checkbox" id="check-fast-detection">
+                                    Field detection is noticeably faster
+                                </label>
+                            </div>
+                            
+                            <div class="score-summary">
+                                <h4>Test Score: <span id="test-score">0/14</span></h4>
+                                <div class="score-bar">
+                                    <div class="score-fill" style="width: 0%"></div>
+                                </div>
+                                <p class="score-message">Complete the checklist to see your score!</p>
+                            </div>
+                        </div>
+
+                        <!-- Performance Results -->
+                        <div class="test-form">
+                            <h3>📊 Performance Metrics</h3>
+                            
+                            <div class="metric-group">
+                                <label for="detection-time">Field Detection Time (ms)</label>
+                                <input type="number" id="detection-time" placeholder="e.g., 50">
+                                <div class="field-info">Check console.time() logs</div>
+                            </div>
+                            
+                            <div class="metric-group">
+                                <label for="fill-time">Form Fill Time (ms)</label>
+                                <input type="number" id="fill-time" placeholder="e.g., 200">
+                                <div class="field-info">Time to fill entire form</div>
+                            </div>
+                            
+                            <div class="metric-group">
+                                <label for="accuracy-rate">Accuracy Rate (%)</label>
+                                <input type="number" id="accuracy-rate" min="0" max="100" placeholder="e.g., 95">
+                                <div class="field-info">% of fields filled correctly</div>
+                            </div>
+                            
+                            <div class="benchmark-comparison">
+                                <h4>Expected Benchmarks:</h4>
+                                <ul>
+                                    <li><strong>Detection Time:</strong> &lt; 50ms for 10 fields</li>
+                                    <li><strong>Fill Time:</strong> &lt; 200ms for 10 fields</li>
+                                    <li><strong>Accuracy Rate:</strong> &gt; 90%</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!-- Issue Reporting -->
+                        <div class="test-form">
+                            <h3>🐛 Issue Reporting</h3>
+                            
+                            <div class="field-group">
+                                <label for="browser-info">Browser & Version</label>
+                                <input type="text" id="browser-info" placeholder="e.g., Chrome 118.0.5993.117">
+                            </div>
+                            
+                            <div class="field-group">
+                                <label for="extension-version">Extension Version</label>
+                                <input type="text" id="extension-version" placeholder="e.g., 2.0.0">
+                            </div>
+                            
+                            <div class="field-group">
+                                <label for="issues-found">Issues Found</label>
+                                <textarea id="issues-found" rows="5" placeholder="Describe any issues, bugs, or unexpected behavior..."></textarea>
+                            </div>
+                            
+                            <div class="field-group">
+                                <label for="console-errors">Console Errors</label>
+                                <textarea id="console-errors" rows="3" placeholder="Copy any console errors here..."></textarea>
+                            </div>
+                            
+                            <div class="field-group">
+                                <label for="suggestions">Suggestions</label>
+                                <textarea id="suggestions" rows="3" placeholder="Any suggestions for improvement..."></textarea>
+                            </div>
+                            
+                            <button type="button" id="save-report" class="btn-primary">Save Test Report</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Test Suite Info</h4>
+                    <p>Version: 2.0.0 Enhanced</p>
+                    <p>Last Updated: October 2025</p>
+                    <p>Features: Desktop Integration</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Key Features Tested</h4>
+                    <ul>
+                        <li>Smart Field Scoring (0-100+)</li>
+                        <li>Visual Feedback (Green Glow)</li>
+                        <li>Framework Compatibility</li>
+                        <li>Rich Text Editor Support</li>
+                        <li>Security & Context Validation</li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Resources</h4>
+                    <ul>
+                        <li><a href="#basic">Basic Forms</a></li>
+                        <li><a href="#advanced">Advanced Fields</a></li>
+                        <li><a href="#social">Social Media</a></li>
+                        <li><a href="#richtext">Rich Text</a></li>
+                        <li><a href="#security">Security Tests</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Universal Form Auto-Filler Test Suite. Enhanced with Desktop Features.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
