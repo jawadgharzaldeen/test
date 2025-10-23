@@ -828,20 +828,24 @@
                                 <div class="field-info">Should be filled before context invalidation</div>
                             </div>
                             
-                            <div class="test-instructions">
-                                <h4>Test Steps:</h4>
-                                <ol>
-                                    <li>Fill this form normally (should work)</li>
-                                    <li>Go to chrome://extensions</li>
-                                    <li>Click the reload button for your extension</li>
-                                    <li>Return to this page (don't refresh)</li>
-                                    <li>Try to fill the form again</li>
-                                    <li>Check console for "Context invalid" message</li>
-                                </ol>
-                                <p><strong>Expected:</strong> Second fill attempt should be blocked with warning message.</p>
-                            </div>
-                            
-                            <button type="submit" class="btn-primary">Test Context Validation</button>
+                    <div class="test-instructions">
+                        <h4>🔧 Extension Detection Helper:</h4>
+                        <p><strong>Problem:</strong> Extension showing 0 fields? Fields in inactive tabs are hidden!</p>
+                        <button type="button" id="enable-detection" class="btn-secondary" onclick="window.testSuite.extension.enableDetectionMode()">🔍 Enable Detection Mode</button>
+                        <button type="button" id="scan-all-fields" class="btn-secondary" onclick="window.testSuite.extension.getAllFields()">📊 Scan All Fields</button>
+                        <p><strong>Usage:</strong> Click "Enable Detection Mode" before using your extension to make all fields detectable!</p>
+                        
+                        <h4>Test Steps:</h4>
+                        <ol>
+                            <li>Fill this form normally (should work)</li>
+                            <li>Go to chrome://extensions</li>
+                            <li>Click the reload button for your extension</li>
+                            <li>Return to this page (don't refresh)</li>
+                            <li>Try to fill the form again</li>
+                            <li>Check console for "Context invalid" message</li>
+                        </ol>
+                        <p><strong>Expected:</strong> Second fill attempt should be blocked with warning message.</p>
+                    </div>                            <button type="submit" class="btn-primary">Test Context Validation</button>
                         </form>
                     </div>
                 </div>

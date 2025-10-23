@@ -969,6 +969,79 @@ window.tinyMCEHelpers = {
     }
 };
 
+// Extension Detection Helper
+window.extensionHelper = {
+    // Enable detection mode for extension scanning
+    enableDetectionMode: function() {
+        document.body.classList.add('extension-detection-mode');
+        console.log('🔍 Extension detection mode enabled - all fields are now visible for scanning');
+        
+        // Auto-disable after 5 seconds
+        setTimeout(() => {
+            this.disableDetectionMode();
+        }, 5000);
+    },
+    
+    // Disable detection mode
+    disableDetectionMode: function() {
+        document.body.classList.remove('extension-detection-mode');
+        console.log('👁️ Extension detection mode disabled - normal tab visibility restored');
+    },
+    
+    // Get all form fields across all tabs
+    getAllFields: function() {
+        // Temporarily enable detection mode
+        this.enableDetectionMode();
+        
+        setTimeout(() => {
+            const allFields = document.querySelectorAll('input, select, textarea');
+            const fieldsByTab = {};
+            
+            allFields.forEach(field => {
+                const tabContent = field.closest('.tab-content');
+                const tabId = tabContent ? tabContent.id : 'unknown';
+                
+                if (!fieldsByTab[tabId]) {
+                    fieldsByTab[tabId] = [];
+                }
+                
+                fieldsByTab[tabId].push({
+                    element: field.tagName.toLowerCase(),
+                    type: field.type || 'text',
+                    id: field.id || '',
+                    name: field.name || '',
+                    placeholder: field.placeholder || '',
+                    visible: field.offsetWidth > 0 && field.offsetHeight > 0
+                });
+            });
+            
+            console.log('📊 All fields by tab:', fieldsByTab);
+            console.log(`📈 Total fields found: ${allFields.length}`);
+            
+            this.disableDetectionMode();
+        }, 100);
+    }
+};
+
+// Listen for extension messages to enable detection mode
+document.addEventListener('extension-scan-request', function() {
+    console.log('📡 Extension scan request received - enabling detection mode');
+    window.extensionHelper.enableDetectionMode();
+});
+
+// Automatically enable detection mode when extension popup is likely to be opened
+let lastActivityTime = Date.now();
+document.addEventListener('visibilitychange', function() {
+    if (!document.hidden) {
+        const timeSinceLastActivity = Date.now() - lastActivityTime;
+        if (timeSinceLastActivity > 2000) { // If page was hidden for more than 2 seconds
+            console.log('📄 Page became visible after being away - enabling detection mode for potential extension scan');
+            window.extensionHelper.enableDetectionMode();
+        }
+    }
+    lastActivityTime = Date.now();
+});
+
 // Export functions for external use
 window.testSuite = {
     generateTestData,
@@ -980,5 +1053,8 @@ window.testSuite = {
     getFieldEvents: () => window.getFieldEvents?.() || [],
     
     // TinyMCE integration
-    tinyMCE: window.tinyMCEHelpers
+    tinyMCE: window.tinyMCEHelpers,
+    
+    // Extension detection helper
+    extension: window.extensionHelper
 };

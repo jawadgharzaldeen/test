@@ -190,6 +190,26 @@ body {
     display: block;
 }
 
+/* Extension detection mode - make all fields temporarily visible for detection */
+body.extension-detection-mode .tab-content {
+    display: block !important;
+    position: absolute !important;
+    top: -9999px !important;
+    left: -9999px !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    z-index: -1000 !important;
+    pointer-events: none !important;
+}
+
+body.extension-detection-mode .tab-content.active {
+    position: relative !important;
+    top: auto !important;
+    left: auto !important;
+    z-index: auto !important;
+    pointer-events: auto !important;
+}
+
 .test-section h2 {
     color: #667eea;
     margin-bottom: 15px;
