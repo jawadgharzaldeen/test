@@ -212,23 +212,72 @@ function initializeRichTextEditors() {
     // TinyMCE initialization (if available)
     if (typeof tinymce !== 'undefined') {
         tinymce.init({
-            selector: '.wp-editor-area',
-            height: 200,
+            selector: '.wp-editor-area, .tinymce-editor',
+            height: 250,
             menubar: false,
             plugins: [
-                'advlist autolink lists link image charmap print preview anchor',
+                'advlist autolink lists link image charmap anchor',
                 'searchreplace visualblocks code fullscreen',
-                'insertdatetime media table paste code help wordcount'
+                'insertdatetime media table paste help wordcount'
             ],
-            toolbar: 'undo redo | formatselect | bold italic backcolor | \
+            toolbar: 'undo redo | formatselect | bold italic underline | \
                      alignleft aligncenter alignright alignjustify | \
-                     bullist numlist outdent indent | removeformat | help',
+                     bullist numlist | link image | code fullscreen',
+            
+            // Content styling
+            content_style: 'body { font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Open Sans,Helvetica Neue,sans-serif; font-size: 14px }',
+            
+            // Auto-fill support
             setup: function(editor) {
+                // Initialize event
                 editor.on('init', function() {
-                    console.log('TinyMCE editor initialized for testing');
+                    console.log('✅ TinyMCE initialized:', editor.id);
+                    
+                    // Add to global editor registry for extension access
+                    if (!window.tinyMCEEditors) {
+                        window.tinyMCEEditors = {};
+                    }
+                    window.tinyMCEEditors[editor.id] = editor;
                 });
+                
+                // Content change tracking
+                editor.on('change input', function() {
+                    console.log('📝 TinyMCE content changed:', editor.id);
+                    
+                    // Trigger custom event for extension detection
+                    const customEvent = new CustomEvent('tinymce-content-changed', {
+                        detail: {
+                            editorId: editor.id,
+                            content: editor.getContent(),
+                            textContent: editor.getContent({format: 'text'})
+                        }
+                    });
+                    document.dispatchEvent(customEvent);
+                });
+                
+                // Focus/blur tracking
+                editor.on('focus', function() {
+                    console.log('🎯 TinyMCE focused:', editor.id);
+                    editor.getContainer().classList.add('tinymce-focused');
+                });
+                
+                editor.on('blur', function() {
+                    console.log('👋 TinyMCE blurred:', editor.id);
+                    editor.getContainer().classList.remove('tinymce-focused');
+                });
+            },
+            
+            // Extension-friendly settings
+            init_instance_callback: function(editor) {
+                // Make editor accessible for form auto-fill
+                editor.getElement().setAttribute('data-tinymce-id', editor.id);
+                
+                // Add visual indicator for testing
+                editor.getContainer().setAttribute('data-test-ready', 'true');
             }
         });
+    } else {
+        console.warn('⚠️ TinyMCE not loaded. Rich text editing will use contenteditable fallback.');
     }
     
     // Simple contenteditable setup
@@ -838,6 +887,93 @@ function displayWelcomeMessage() {
     `);
 }
 
+// TinyMCE Helper Functions for Extension Testing
+window.tinyMCEHelpers = {
+    // Fill TinyMCE editor with content
+    fillEditor: function(editorId, content) {
+        const editor = tinymce.get(editorId);
+        if (editor) {
+            editor.setContent(content);
+            editor.save(); // Sync with textarea
+            
+            // Visual feedback
+            const container = editor.getContainer();
+            container.classList.add('field-filled');
+            setTimeout(() => {
+                container.classList.remove('field-filled');
+            }, 3000);
+            
+            console.log('📝 TinyMCE filled:', editorId);
+            return true;
+        }
+        console.warn('⚠️ TinyMCE editor not found:', editorId);
+        return false;
+    },
+    
+    // Fill all TinyMCE editors with test content
+    fillAllEditors: function(content = '<p>This is test content for the <strong>TinyMCE</strong> editor. The extension should be able to detect and fill rich text editors automatically.</p><p>Testing <em>italic text</em> and <u>underlined text</u>.</p>') {
+        if (window.tinyMCEEditors) {
+            let filledCount = 0;
+            Object.keys(window.tinyMCEEditors).forEach(editorId => {
+                if (this.fillEditor(editorId, content)) {
+                    filledCount++;
+                }
+            });
+            console.log(`📊 Filled ${filledCount} TinyMCE editors`);
+            return filledCount;
+        }
+        return 0;
+    },
+    
+    // Get all editor contents
+    getAllContents: function() {
+        const contents = {};
+        if (window.tinyMCEEditors) {
+            Object.keys(window.tinyMCEEditors).forEach(editorId => {
+                const editor = window.tinyMCEEditors[editorId];
+                contents[editorId] = {
+                    html: editor.getContent(),
+                    text: editor.getContent({format: 'text'})
+                };
+            });
+        }
+        return contents;
+    },
+    
+    // Clear all editors
+    clearAllEditors: function() {
+        if (window.tinyMCEEditors) {
+            let clearedCount = 0;
+            Object.keys(window.tinyMCEEditors).forEach(editorId => {
+                const editor = window.tinyMCEEditors[editorId];
+                editor.setContent('');
+                clearedCount++;
+            });
+            console.log(`🧹 Cleared ${clearedCount} TinyMCE editors`);
+            return clearedCount;
+        }
+        return 0;
+    },
+    
+    // List all available editors
+    listEditors: function() {
+        if (window.tinyMCEEditors) {
+            const editorInfo = Object.keys(window.tinyMCEEditors).map(editorId => {
+                const editor = window.tinyMCEEditors[editorId];
+                return {
+                    id: editorId,
+                    element: editor.getElement().tagName,
+                    hasContent: editor.getContent().length > 0,
+                    wordCount: editor.plugins.wordcount ? editor.plugins.wordcount.getCount() : 'N/A'
+                };
+            });
+            console.table(editorInfo);
+            return editorInfo;
+        }
+        return [];
+    }
+};
+
 // Export functions for external use
 window.testSuite = {
     generateTestData,
@@ -846,5 +982,8 @@ window.testSuite = {
     runFieldDetectionTest,
     trackFillingAccuracy,
     getResults: () => window.testResults,
-    getFieldEvents: () => window.getFieldEvents?.() || []
+    getFieldEvents: () => window.getFieldEvents?.() || [],
+    
+    // TinyMCE integration
+    tinyMCE: window.tinyMCEHelpers
 };
