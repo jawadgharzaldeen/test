@@ -1020,6 +1020,88 @@ window.extensionHelper = {
             
             this.disableDetectionMode();
         }, 100);
+    },
+
+    // NEW: Extension Injection Diagnostics
+    testExtensionInjection: function() {
+        console.log('🔧 Testing extension content script injection...');
+        
+        try {
+            // Test if extension context exists
+            if (typeof chrome !== 'undefined' && chrome.runtime) {
+                console.log('✅ Chrome extension context available');
+                console.log('Extension ID:', chrome.runtime.id);
+            } else {
+                console.log('❌ Chrome extension context NOT available');
+            }
+            
+            // Test if our content scripts are loaded
+            const contentScriptTests = [
+                'FormAutomation',
+                'storageController', 
+                'messageValidator',
+                'Logger',
+                'SafeDOM',
+                'FormDetector',
+                'FieldFiller'
+            ];
+            
+            contentScriptTests.forEach(scriptName => {
+                const exists = typeof window[scriptName] !== 'undefined';
+                console.log(`${exists ? '✅' : '❌'} ${scriptName}: ${exists ? 'LOADED' : 'NOT LOADED'}`);
+            });
+            
+            // Test message passing
+            if (typeof chrome !== 'undefined' && chrome.runtime) {
+                try {
+                    chrome.runtime.sendMessage({action: 'ping'}, (response) => {
+                        if (chrome.runtime.lastError) {
+                            console.log('❌ Message passing error:', chrome.runtime.lastError.message);
+                        } else {
+                            console.log('✅ Message passing working:', response);
+                        }
+                    });
+                } catch (error) {
+                    console.log('❌ Message passing failed:', error);
+                }
+            }
+            
+        } catch (error) {
+            console.error('🔥 Extension injection test failed:', error);
+        }
+    },
+
+    // NEW: Show troubleshooting help
+    showExtensionHelp: function() {
+        const helpHtml = `
+            <div id="extension-help" style="position: fixed; top: 10px; right: 10px; background: #f0f0f0; padding: 20px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.3); z-index: 10000; max-width: 400px; font-family: monospace; font-size: 12px;">
+                <h3 style="margin-top: 0;">🔧 Extension Troubleshooting</h3>
+                <p><strong>Issue:</strong> Content script injection timeout</p>
+                <h4>Quick Fixes:</h4>
+                <ol style="font-size: 11px;">
+                    <li><strong>Refresh Page:</strong> Press F5 or Ctrl+R</li>
+                    <li><strong>Reload Extension:</strong>
+                        <br>• Go to chrome://extensions
+                        <br>• Find your extension
+                        <br>• Click the reload button ⟲
+                    </li>
+                    <li><strong>Check Permissions:</strong>
+                        <br>• Extension needs "Access to all websites"
+                    </li>
+                    <li><strong>Try Local Test:</strong>
+                        <br>• Test on localhost:8000/docs/ex.html first
+                    </li>
+                </ol>
+                <button onclick="document.getElementById('extension-help').remove()" style="margin-top: 10px; padding: 5px 10px; font-size: 11px;">Close</button>
+                <button onclick="window.extensionHelper.testExtensionInjection()" style="margin-top: 10px; padding: 5px 10px; margin-left: 5px; font-size: 11px;">Run Diagnostics</button>
+            </div>
+        `;
+        
+        // Remove existing help if present
+        const existing = document.getElementById('extension-help');
+        if (existing) existing.remove();
+        
+        document.body.insertAdjacentHTML('beforeend', helpHtml);
     }
 };
 

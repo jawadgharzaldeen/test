@@ -831,8 +831,9 @@
                     <div class="test-instructions">
                         <h4>🔧 Extension Detection Helper:</h4>
                         <p><strong>Problem:</strong> Extension showing 0 fields? Fields in inactive tabs are hidden!</p>
-                        <button type="button" id="enable-detection" class="btn-secondary" onclick="window.testSuite.extension.enableDetectionMode()">🔍 Enable Detection Mode</button>
-                        <button type="button" id="scan-all-fields" class="btn-secondary" onclick="window.testSuite.extension.getAllFields()">📊 Scan All Fields</button>
+                        <button type="button" id="enable-detection" class="btn-secondary" onclick="window.extensionHelper.enableDetectionMode()">🔍 Enable Detection Mode</button>
+                        <button type="button" id="scan-all-fields" class="btn-secondary" onclick="window.extensionHelper.getAllFields()">📊 Scan All Fields</button>
+                        <button type="button" id="extension-help" class="btn-secondary" onclick="window.extensionHelper.showExtensionHelp()">🆘 Extension Help</button>
                         <p><strong>Usage:</strong> Click "Enable Detection Mode" before using your extension to make all fields detectable!</p>
                         
                         <h4>Test Steps:</h4>
